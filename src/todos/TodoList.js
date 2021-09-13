@@ -1,10 +1,15 @@
 import React, { useEffect } from 'react';
 import TodoListItem from './TodoListItem';
 import NewTodoForm from './NewTodoForm';
-import './TodoList.css';
 import { connect } from 'react-redux';
 import { loadTodos, removeTodoReq, markTodoAsCompleted } from './thunks';
-import { getTodos, getTodosLoading, getIncompleteTodos, getCompletedTodos } from './selectors';
+import { getTodosLoading, getIncompleteTodos, getCompletedTodos } from './selectors';
+import styled from 'styled-components';
+
+const ListWrapper = styled.div`
+    max-width: 700px;
+    margin: auto;
+    `;
 
 const TodoList = ({ completedTodos, incompleteTodos, onRemovePressed, onMarkAsCompletedPressed, isLoading, startLoadingTodos }) => {
     useEffect(() => {
@@ -13,7 +18,7 @@ const TodoList = ({ completedTodos, incompleteTodos, onRemovePressed, onMarkAsCo
 
     const loadingMessage = <div>Loading todos...</div>;
     const content = (
-        <div className="list-wrapper">
+        <ListWrapper>
             <NewTodoForm />
             <h3>Incomplete</h3>
             {incompleteTodos.map(todo => <TodoListItem todo={todo} onRemovePressed={onRemovePressed}
@@ -21,7 +26,7 @@ const TodoList = ({ completedTodos, incompleteTodos, onRemovePressed, onMarkAsCo
             <h3>Completed</h3>
             {completedTodos.map(todo => <TodoListItem todo={todo} onRemovePressed={onRemovePressed}
             onMarkAsCompletedPressed={onMarkAsCompletedPressed}/>)}
-        </div>
+        </ListWrapper>
     );
 
     return isLoading ? loadingMessage : content;
