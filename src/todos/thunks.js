@@ -1,6 +1,6 @@
 import { removeTodo, loadTodosInProgress, loadTodosSuccess, loadTodosFailure, createTodo, markAsCompleted } from "./actions";
 
-export const loadTodos = () => async (dispatch, getState) => {
+export const loadTodos = () => async dispatch => {
     
     try {
         dispatch(loadTodosInProgress());
